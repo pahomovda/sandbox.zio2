@@ -2,7 +2,8 @@ import sbt._
 import sbt.Keys._
 
 object Settings {
-  val zioTest = Seq(
-    testFrameworks := Seq(new TestFramework("zio.test.sbt.ZTestFramework"))
+  final val zioTest = Seq(
+    libraryDependencies ++= Dependency.zioTest,
+    testFrameworks += new TestFramework("zio.test.sbt.ZTestFramework")
   )
 }
