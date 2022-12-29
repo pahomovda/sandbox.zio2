@@ -1,22 +1,12 @@
-val zioVersion = "2.0.5"
+ThisBuild / organization := "com.github.ymatigoosa"
+ThisBuild / version      := "0.0.1"
+ThisBuild / scalaVersion := "3.2.1"
 
-lazy val root = project
-  .in(file("."))
-  .settings(
-    inThisBuild(
-      List(
-        name := "sandbox.zio2",
-        organization := "com.github.ymatigoosa",
-        version := "0.0.1",
-        scalaVersion := "3.2.2-RC2"
-      )
-    ),
-    libraryDependencies ++= Seq(
-      "dev.zio" %% "zio"               % zioVersion,
-      "dev.zio" %% "zio-test"          % zioVersion % Test,
-      "dev.zio" %% "zio-test-sbt"      % zioVersion % Test,
-      "dev.zio" %% "zio-test-junit"    % zioVersion % Test,
-      "dev.zio" %% "zio-test-magnolia" % zioVersion % Test
-    ),
-    testFrameworks := Seq(new TestFramework("zio.test.sbt.ZTestFramework"))
-  )
+lazy val symposiumApi = project
+  .in(file("service/symposium/api"))
+  .enablePlugins(ProjectKindServiceApi)
+
+lazy val symposiumApp = project
+  .in(file("service/symposium/app"))
+  .enablePlugins(ProjectKindServiceApp)
+  .dependsOn(symposiumApi)
