@@ -4,7 +4,9 @@ object Dependency {
   private object Version {
     val zio = "2.0.5"
     val zioJson = "0.4.2"
+    val zioConfig = "3.0.6"
     val tapir = "1.2.4"
+    val typesafeConfig = "1.4.2"
   }
 
   final val zio = List(
@@ -37,5 +39,15 @@ object Dependency {
 
   final val zioJson = Seq(
     "dev.zio" %% "zio-json" % Version.zioJson,
+  )
+
+  final val zioConfig = Seq(
+    "dev.zio" %% "zio-config" % Version.zioConfig,
+    "dev.zio" %% "zio-config-magnolia" % Version.zioConfig,
+  )
+
+  final val zioConfigTypesafeConfig = Seq(
+    "com.typesafe" % "config" % Version.typesafeConfig,
+    "dev.zio" %% "zio-config-typesafe" % Version.zioConfig,
   )
 }
