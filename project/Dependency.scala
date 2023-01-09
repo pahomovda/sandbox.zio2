@@ -7,6 +7,7 @@ object Dependency {
     val zioConfig = "3.0.6"
     val tapir = "1.2.4"
     val typesafeConfig = "1.4.2"
+    val sttp = "3.8.7"
   }
 
   final val zio = List(
@@ -49,5 +50,13 @@ object Dependency {
   final val zioConfigTypesafeConfig = Seq(
     "com.typesafe" % "config" % Version.typesafeConfig,
     "dev.zio" %% "zio-config-typesafe" % Version.zioConfig,
+  )
+
+  final val sttpCore = Seq(
+    "com.softwaremill.sttp.client3" %% "core" % Version.sttp
+  )
+
+  final val sttpZioHttp = sttpCore ++ Seq(
+    "com.softwaremill.sttp.client3" %% "zio" % Version.sttp
   )
 }

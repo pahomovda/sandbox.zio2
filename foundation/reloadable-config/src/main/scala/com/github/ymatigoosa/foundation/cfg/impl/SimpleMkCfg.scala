@@ -10,6 +10,14 @@ final class SimpleMkCfg(initialConfigSource: ConfigSource) extends MkCfg {
     read(descriptor.from(initialConfigSource.at(PropertyTreePath.$(path))))
       .map(value => new ConstCfg(value))
   }
+
+  def reloadable[A](path: String)(using descriptor: ConfigDescriptor[A]): Task[Cfg[A]] = {
+    static(path).map(value => new ConstCfg(value))
+  }
+
+  def static[A](path: String)(using descriptor: ConfigDescriptor[A]): Task[A] = {
+    read(descriptor.from(initialConfigSource.at(PropertyTreePath.$(path))))
+  }
 }
 
 object SimpleMkCfg {
