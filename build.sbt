@@ -30,7 +30,15 @@ lazy val foundationServer = project
     libraryDependencies ++= Dependency.tapirZioHttpServer,
   )
 
-
+lazy val foundationRoutes = project
+  .in(file("foundation/routes"))
+  .dependsOn(foundationReloadableConfig)
+  .settings(Settings.zioTest)
+  .settings(
+    libraryDependencies ++= Dependency.zio,
+    libraryDependencies ++= Dependency.tapirJsonZio,
+    libraryDependencies ++= Dependency.tapirZio,
+  )
 
 lazy val foundationHttpClientApi = project
   .in(file("foundation/http-client-api"))
@@ -99,6 +107,7 @@ lazy val moduleTodoList = project
 
 lazy val serviceTodoListApi = project
   .in(file("service/todolist-api"))
+  .dependsOn(foundationRoutes)
   .settings(
     libraryDependencies ++= Dependency.tapirCore,
     libraryDependencies ++= Dependency.tapirJsonZio,
@@ -110,6 +119,7 @@ lazy val serviceTodoListApp = project
     // tech
     foundationReloadableConfig,
     foundationBulkhead,
+    foundationRoutes,
     foundationServer,
     foundationHttpClientApi,
     foundationHttpClient,
